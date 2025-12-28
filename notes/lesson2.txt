@@ -1,0 +1,98 @@
+Modules
+------------------------------------------
+
+1.Nest JS modules contains following concepts
+    a.Providers
+    b.Controllers
+    c.Imports
+    d.Exports
+
+
+Providers
+-----------
+Providers in nest js are classes that act as services, factories or repositories
+they encapsulate business logic and can be injected to controllers or other services.
+
+Controllers
+-----------
+It serve the function of handling incoming http requests and sending responses back.
+When we create a new endpoint it need to be registered inside the controller.
+
+Imports
+-----------
+This is an array which hold all the external modules which requires to run the current
+module. Enabling code reusability and seperation of concerns.
+
+Exports
+-----------
+Utilized to make services are available for other modules.
+
+____________________________________________________________________________________________________
+
+Our application will have a root module. Which is specific to nest js framework.
+
+Root module is the entry point and responsible for instantiating controllers
+providers and other core elements of the app.
+
+Nest architecture follow the concept of "Module Isolation" ensuring application 
+is oraganized based on distinct functional based features.
+
+@Module({
+    imports:[SongModule]
+    controllers:[AppController]
+    providers:[AppProvider]
+})
+
+export class AppModule
+
+1. Generating Modules
+--------------------------------
+You can use the CLI for this. command is,
+"nest generate module [your-module-name]"
+
+2. Generating Controllers
+--------------------------------
+Use the CLI for this as well. command is,
+"nest generate controller [your-controller-name]"
+
+
+____________________________________________________________________________________________________
+
+Part B - API ENDPOINTS
+---------------------------------------
+
+1. GET requests
+
+    a. get all songs (for an example refer song directory for codes)
+
+    For this we need to import @Get decorator from @nestjs/common
+
+    in your controller body
+
+    @Get()
+    findAllSongs(){
+        return []
+    }
+
+    b. Getting specific song by sending route param
+
+    @Get(':id')
+    findAllSongs(@Param('id') id:string){
+        return []
+    }
+
+    c. Using query params
+
+    @Get()
+    filterSongs(@Query('artist') artist:string){
+        return []
+    }
+
+2. POST requests
+    created with @Post decorator
+
+3. PUT requests
+    created with @Put decorator
+
+4. DELETE requests
+    created with @Delete decorator

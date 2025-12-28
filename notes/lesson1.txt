@@ -3,3 +3,4 @@ Installation
 1. You need to install the nest CLI using the command in nest documentation
 2. Once it is done you need to run the command "nest new [project-name]" this will create a new
 project with the name you provided.
+3. After you can use command "npm run start:dev" to run in watch mode
