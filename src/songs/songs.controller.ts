@@ -9,6 +9,7 @@ import {
   Body,
   ParseIntPipe,
   HttpStatus,
+  Inject,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
@@ -216,9 +217,20 @@ const songs = [
   },
 ];
 
+type Connection = {
+  CONN_STRING: string;
+  DB: string;
+  DB_NAME: string;
+};
+
 @Controller('songs')
 export class SongsController {
-  constructor(private songsService: SongsService) {}
+  constructor(
+    private songsService: SongsService,
+    @Inject('CONNECTION') private connection: Connection,
+  ) {
+    console.log(this.connection);
+  }
 
   @Get()
   findAllSongs(@Query('artist') artist?: string) {

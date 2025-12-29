@@ -1,0 +1,55 @@
+Custom Validation Pipes
+---------------------------------------------
+
+there are various types  of providers.
+
+providers:[
+    {
+        provide: SongsService
+        useclass: SongsService
+    }
+]
+
+we need to use it as a class when inject into another class. alternate way to mention providers
+
+1. Value providers
+----------------------
+
+When you need to create a mocking service instead of the actual service
+
+providers:[
+    {
+        provide: SongsService,
+        useValue: MockSongsService
+    }
+]
+
+(replacing real implementation with mock object)
+
+2. Non class based providers
+----------------------------------------------
+
+export const connection: connection = {
+  CONN_STRING: 'string',
+  DB: 'string',
+  DB_NAME: 'string',
+};
+
+type connection = {
+  CONN_STRING: string;
+  DB: string;
+  DB_NAME: string;
+};
+
+
+think this is an object we need to inject. definietly you can use a value provider method
+for inject this considering it as a constant 
+
+provider:[
+    {
+        provide: 'CONNECTION',
+        useValue: connection
+    }
+]
+
+next go to your service (in this case it is song service), find constructor
