@@ -7,6 +7,8 @@ import {
   Query,
   Post,
   Body,
+  ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
@@ -236,8 +238,14 @@ export class SongsController {
   }
 
   @Put(':id')
-  updateSong(@Param('id') id: number) {
-    return `Updated song ${id}`;
+  updateSong(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return `Updated song ${id} and its type is ${typeof id}`;
   }
 
   @Delete(':id')

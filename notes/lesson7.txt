@@ -1,0 +1,12 @@
+Pipes
+-------------------------------------------
+
+usecases of the Pipes
+1.Transform the values
+
+etc: Think we ahve a get route with parameter id passed into it.
+it is a number but come in as a string we can use a pipe to convert it
+
+@Param('id' , new ParseIntPipe({errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE}))
+
+2. Validate input parameters

@@ -1,0 +1,14 @@
+Error Handling
+-----------------------------------------
+
+nest js has builtin exceptions
+
+in catch block of thr try catch
+
+write 
+
+catch(error){
+        throw HttpException('server error' , httpStatus.InternalServerError , {
+        cause: error
+    })
+}
