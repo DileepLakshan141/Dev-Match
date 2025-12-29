@@ -1,0 +1,39 @@
+Middleware
+-----------------------------
+
+It is a sort of function that excutes between requests. (before route handler get executed)
+
+1. creating a Middleware
+
+@Injectable()
+export class LoggerMiddleware implements NestMiddleware{
+    use(req:any , res:any , next: () => void){
+        console.log()
+    }
+}
+
+we need to implement the NestMiddleware interface to create a logger Middleware
+
+it is sort of a dependancy that you can inject into module
+
+2. Apply Middleware
+
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer){
+        consumer.apply(LoogerMiddleware).forRoutes('songs')
+    }
+}
+
+Implementation
+---------------------------------------
+
+1.create common directory and inside it create folder middleware
+
+2. run the following command with the flags
+
+nest generate mi common/middleware/logger --no-flat --no-spec dry-run
+
+this will create a file but no spec file and no new direcotories are created
+since it is dry run no files wont be written to disk
+
+another option is .forRoutes({path: "songs: , method: RequestMethod.POST})
