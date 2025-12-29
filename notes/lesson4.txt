@@ -1,0 +1,45 @@
+Request Body
+---------------------------------
+
+first, install class-validator and class-transformer packages using npm.
+
+Next we need to use a validation pipe. we can use it in our controller functions
+but for the above case I will use it as global one so I can use it in every controller
+
+go to the main.ts file and add this line before the app.listen() line
+
+inside the songs directory create a folder called dto (Data Transfer Object)
+inside it create the file "crete-song-dto.ts"
+
+import {
+  IsArray,
+  IsDateString,
+  IsMilitaryTime,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
+
+export class CreateSongDTO {
+  @IsString()
+  @IsNotEmpty()
+  readonly title: string;
+
+  @IsNotEmpty()
+  @IsArray()
+  @IsString()
+  readonly artists: string[];
+
+  @IsNotEmpty()
+  @IsDateString()
+  readonly released: Date;
+
+  @IsMilitaryTime()
+  @IsNotEmpty()
+  readonly duration: Date;
+}
+
+
+after adding following code go to http method of relevant controller file
+create(@Body() createSong: CreateSongDTO)
+
+now we use the body payload in createSong object

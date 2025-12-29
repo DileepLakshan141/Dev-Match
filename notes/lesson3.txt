@@ -1,0 +1,36 @@
+Services 
+____________________________________________________________________________________________________
+
+Providers, which can inject to another class.
+Responsible for,
+    1. Fetch from DB
+    2. Insert into DB
+
+This service can be injected into controllers (one or multiple)
+
+Services can be exported and used in another module
+(it is a class with injectable decorator)
+
+import {Injectable} from '@nestjs/common'
+
+@Injectable()
+export class SongService{
+
+}
+
+injecting the service
+---------------------
+
+@Controller('songs')
+export class SongController{
+    constructor(private songsService: SongService)
+}
+
+generating service
+---------------------
+
+use CLI command
+"nest generate service [your-service-name]"
+
+another important thing is the created service should be mentioned in providers
+array of module.ts file(it will be automatically if we use CLI)
