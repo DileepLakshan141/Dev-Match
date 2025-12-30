@@ -1,0 +1,27 @@
+Injection Scope
+-------------------------------------------
+
+a provider can have following scopes.
+
+1.Default Scope
+---------------
+a single instance of the provider shared across the entire application
+nest js cache it when called it in second time.
+
+2.Request
+---------------
+a new instance is created for each incoming Request
+
+3.Transient
+---------------
+not shared among consumers. each consumer that inject transient provider will
+receive new dedicated instance
+
+how to do this?
+----------------
+
+go to your service file. find the @Injectable decorator and
+pass the following {scope: Scope.REQUEST}
+
+go to controller. find the @Controller decorator and pass the following
+{path:'songs' , scope:Scope.TRANSIENT}

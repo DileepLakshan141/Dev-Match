@@ -1,0 +1,6 @@
+One to Many Relationships
+------------------------------------------
+
+think of user which have multiple playlists. but each playlist have one user.
+
+1. create an entitiy

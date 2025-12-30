@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   HttpStatus,
   Inject,
+  Scope,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dto/create-song-dto';
@@ -223,7 +224,10 @@ type Connection = {
   DB_NAME: string;
 };
 
-@Controller('songs')
+@Controller({
+  path: 'songs',
+  scope: Scope.REQUEST,
+})
 export class SongsController {
   constructor(
     private songsService: SongsService,
