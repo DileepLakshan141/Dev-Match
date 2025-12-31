@@ -18,7 +18,7 @@ export class Song {
   @Column('time')
   duration: Date;
 
-  @Column('text')
+  @Column('text', { nullable: false, default: 'sample' })
   lyrics: string;
 
   @ManyToMany(() => Playlist, (playlist) => playlist.songs)

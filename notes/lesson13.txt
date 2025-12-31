@@ -1,0 +1,41 @@
+CRUD Operations
+----------------------------------
+
+for every typeorm entity, it provides an repository.
+this repo has crud features.
+
+steps
+-------
+1. first you have to register type orm module as a feature for into the relevant module
+in this case it is "Song" as follows
+
+imports: [TypeOrmModule.forFeature([Song])],
+
+2.then we need to inject songs repository.
+this forFeature method defines which repos are registered to current scope
+
+go to songService and use the decorator @InjectRepository()
+
+constructor(
+    @InjectRepository(Song) private songRepository: Repository<Song>,
+  ) {}
+
+async create(songDTO: CreateSongDTO): Promise<Song> {
+    const song = new Song();
+    song.title = songDTO.title;
+    song.releasedDate = songDTO.released;
+    song.duration = songDTO.duration;
+    song.artists = songDTO.artists;
+    song.lyrics = songDTO.lyrics;
+
+    return await this.songRepository.save(song);
+  }
+
+  how create method is looks like
+
+4. update the controller as follows
+
+@Post()
+  createSong(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
+    return this.songsService.create(createSongDTO);
+  }
