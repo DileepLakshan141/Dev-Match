@@ -10,6 +10,9 @@ import { SongsModule } from './songs/songs.module';
 import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { Song } from './songs/song.entity';
+import { Playlist } from './playlists/playlist.entity';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
@@ -20,7 +23,7 @@ import { DataSource } from 'typeorm';
       username: 'postgres',
       password: 'root',
       database: 'spotify',
-      entities: [],
+      entities: [Song, Playlist, User],
       synchronize: true,
     }),
     SongsModule,

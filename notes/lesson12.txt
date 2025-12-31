@@ -1,0 +1,28 @@
+Create an Entity
+----------------------------------
+
+it is a sort of class that map into a table in our database.
+
+it is simple as follows you create table then mark it as Entity using typeorm decorator
+
+@Entity('songs')
+export class Song{
+
+}
+
+the name you pass the decorator is the table name.
+
+if you need auto generated id,
+
+@PrimaryGeneratedColumn()
+id:number
+
+now this is auto increment
+
+@Column('varchar', {nullable:false})
+name:string
+creating columns
+
+type can be 'date' or 'time' or 'text' etc
+
+make sure to add the entity to entities array in app module
