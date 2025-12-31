@@ -1,0 +1,27 @@
+Connecting Postgres DB
+------------------------------------
+
+1.install the following packages
+
+@nestjs/typeorm
+typeorm
+pg
+
+2. go to your app module file and in imports section array add this
+
+TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      database: 'spotify',
+      entities: [],
+      synchronize: true,
+    }),
+
+3. next go inside app module and call the instructor with datasource object
+
+constructor(private dataSource: DataSource) {
+    console.log('dbname', dataSource.driver.database);
+  }
