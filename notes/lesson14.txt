@@ -1,0 +1,27 @@
+Pagination
+----------------------------------------
+
+install the package
+"nestjs-typeorm-paginate"
+
+setup
+-------------
+
+add a new method inside the song songService
+
+import paginate, Pagination , IPaginationOptions from the new package
+
+async paginate(options: IPaginationOptions):Promise<Pagination<Song>>{
+    return paginate<Song>(this.songRepository , options)
+}
+
+in controller find all function should update as follows
+
+@Get()
+  findAllSongs(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ): Promise<Pagination<Song>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.songsService.paginate({ page, limit });
+  }

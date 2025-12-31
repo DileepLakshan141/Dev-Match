@@ -5,6 +5,11 @@ import { Song } from './song.entity';
 import { Repository } from 'typeorm';
 import { CreateSongDTO } from './dto/create-song-dto';
 import { UpdateSongDTO } from './dto/update-song-dto';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 
 @Injectable({
   scope: Scope.TRANSIENT,
@@ -41,5 +46,9 @@ export class SongsService {
 
   async delete(id: number): Promise<void> {
     await this.songRepository.delete({ id });
+  }
+
+  async paginate(options: IPaginationOptions): Promise<Pagination<Song>> {
+    return paginate<Song>(this.songRepository, options);
   }
 }

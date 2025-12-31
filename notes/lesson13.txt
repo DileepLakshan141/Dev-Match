@@ -39,3 +39,12 @@ async create(songDTO: CreateSongDTO): Promise<Song> {
   createSong(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
+
+that the create operation, when it comes to the find all
+we can use findAll() method
+
+to find specific one findOneBy()
+
+to update update()
+
+to delete delete()
