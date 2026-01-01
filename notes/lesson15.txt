@@ -1,6 +1,9 @@
 User Auth - Signup & Signin
 ------------------------------------------------
 
+1. Signup
+------------------------------------------------
+
 install "brcyptjs" and "@types/brcyptjs" packages.
 
 create module, service and controller for auth using nest CLI (now you know the commands)
@@ -20,3 +23,22 @@ steps
 4. inject the user repository to user service and implement create function inside user service
 
 5. what happen is when we call auth controller signup endpoint it call the user service create function.
+
+
+2. Signin
+-----------------------------------------------------
+
+since we going to impleement jwt using passport auth strategy, install
+the following packages first.
+
+@nestjs/passport
+passport
+
+steps
+----------------
+1. go to auth controller and create login route
+
+2. next go to auth service and create login function in that function use
+email to pass inside to find the target user and make sure to use userService inside auth service.
+
+3. in the auth controller inject auth service and call the login function in signin endpoint
