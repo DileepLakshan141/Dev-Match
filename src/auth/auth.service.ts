@@ -4,12 +4,16 @@ import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
 import bcrypt from 'node_modules/bcryptjs';
 import { CreateUserDTO } from 'src/users/dto/create-user-dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-  async login(loginDTO: LoginUserDTO): Promise<User | null> {
+  async login(loginDTO: LoginUserDTO): Promise<{ access_token: string }> {
     const target_user = await this.usersService.findOne(loginDTO.email);
 
     if (!target_user) {
@@ -20,8 +24,12 @@ export class AuthService {
       loginDTO.password,
       target_user?.password,
     );
+
+    const payload = { email: target_user.email, sub: target_user.id };
+
     if (password_match) {
-      return target_user;
+      const token = this.jwtService.sign(payload);
+      return { access_token: token };
     } else {
       throw new HttpException(
         'Passwords does not match',

@@ -42,3 +42,45 @@ steps
 email to pass inside to find the target user and make sure to use userService inside auth service.
 
 3. in the auth controller inject auth service and call the login function in signin endpoint
+
+3. JWT auth setup
+-----------------------------------
+
+import jwt module to auth module
+and imports array add JwtModule.register({secret: "your_sec_key" , signOptions: {expiresIn:"1d"}})
+
+next create a jwt-strategy.ts in auth folder (sort of a provider which can be injected)
+
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { constants } from 'src/common/constants/constants';
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: constants.secret,
+    });
+  }
+
+  validate(payload: { email: string; sub: string }) {
+    return { userId: payload.sub, email: payload.email };
+  }
+}
+
+next register the jwt strategy in auth module
+
+then create auth guard .ts file it is also an injectable file
+
+import { Injectable } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') {}
+
+now you have to add the following line with passing guard
+@UseGuards(JwtAuthGuard)
+this will protect the
