@@ -1,0 +1,22 @@
+User Auth - Signup & Signin
+------------------------------------------------
+
+install "brcyptjs" and "@types/brcyptjs" packages.
+
+create module, service and controller for auth using nest CLI (now you know the commands)
+
+also make sure to add the AuthService in exports array of the AuthModule 
+
+create user module and service as well
+
+steps
+--------
+1. find the user service and inside imports array add our entity repository so we can inject it.
+
+2. find the auth module and in imports array add the UsersModule otherwise we cant use it
+
+3. inside the auth controller create the post endpoint "signup" 
+
+4. inject the user repository to user service and implement create function inside user service
+
+5. what happen is when we call auth controller signup endpoint it call the user service create function.
